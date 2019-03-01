@@ -29,7 +29,7 @@ int main()
 {
 
     BlackGPIO botao(GPIO_60, input); // initialization botão
-    BlackGPIO led1(GPIO_48, BlackLib::output);           // porta 12
+    BlackGPIO led1(GPIO_30, BlackLib::output);           // porta 12
     //ADC adc(AIN0);
     //PWM pwm(P9_14);
 
