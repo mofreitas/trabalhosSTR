@@ -46,8 +46,8 @@ int main()
 	cout << "sleepou" << endl;
 	sleep(1);
 	cout << "fim sleep" << endl;
-	cout << led1.getDirection() << endl;
-	cout << led1.setValue(BlackLib::high) << endl;
+	cout << "Direçao: (se 2 output)" << led1.getDirection() << endl;
+	cout << "sucesso em definir high: " << led1.setValue(BlackLib::high) << endl;
 
         while (!isPressed(botao)){
 	    cout << "ligado" << endl;
