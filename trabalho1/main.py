@@ -7,7 +7,7 @@ import time
 #Definindo pinos
 PIN_LED = "P9_11"
 PIN_BUTTON = "P9_12"
-PIN_PWM = "P9_14"
+PIN_PWM = "P9_22"
 PIN_ADC = "P9_39"
 
 #Configurando os pinos
@@ -19,34 +19,29 @@ PWM.start(PIN_PWM, 0)               #Configurando PWM com duty cycle = 0
 #Funcão que verifica se o botao foi pressiondo por pelo menos 0.5 segundos
 def isPressed(pin):
     if GPIO.input(pin):
-        time.sleep(0.5)
+        time.sleep(0.2)
         if GPIO.input(pin):
+            while GPIO.input(pin):
+                pass
             return True
     return False
 
 
-#O programa inicia e pausa com o aperto do botão, finalizando quando Ctrl+c é pressionado
-while True:
-    try:  
-        #Se botão for pressionado, Led acende e PWM = ADC
-        if isPressed(pin=PIN_BUTTON):
-            GPIO.output(PIN_LED, GPIO.HIGH)
-            
-            while(True):                
-                value = ADC.read(PIN_ADC)
-                PWM.set_duty_cycle(PIN_PWM, value*100.0)
-                print(value)
-
-                if(isPressed(pin=PIN_BUTTON)):
-                    GPIO.output(PIN_LED, GPIO.LOW) 
-                    PWM.set_duty_cycle(PIN_PWM, 0)
-                    break 
-    except:
-        #Define 0 como saída do pino e desativa GPIO
-        GPIO.output(PIN_LED, GPIO.LOW)
-        GPIO.cleanup()
-        #Pára PWM e o desaiva
-        PWM.stop(PIN_PWM)
-        PWM.cleanup()
-        print("fim")
-        break
+#Se botão for pressionado, Led acende e PWM = ADC
+while not isPressed(pin=PIN_BUTTON):
+    pass
+GPIO.output(PIN_LED, GPIO.HIGH)
+           
+while not isPressed(pin=PIN_BUTTON):                
+    value = ADC.read(PIN_ADC)
+    PWM.set_duty_cycle(PIN_PWM, value*100.0)
+    print(value)
+        
+#Define 0 como saída do pino e desativa GPIO
+GPIO.output(PIN_LED, GPIO.LOW)
+GPIO.cleanup()
+#Pára PWM e o desativa 
+#PWM.set_duty_cycle(PIN_PWM, 0) 
+PWM.stop(PIN_PWM)
+PWM.cleanup()
+print("fim")
