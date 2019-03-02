@@ -16,5 +16,5 @@ Criar um programa na *Beaglebone Black* que cumpra os seguintes requisitos:
 - Uso de Pino ADC
 - Log do estados de cada pino
 
-Dessa forma, criamos um programa que lê a tensão sobre um potenciômetro emite o sinal proporcional por meio de um PWM a um LED. Seu funcionamento é indicado pelo acendimento de um LED, sendo ativado e pausado quando apertamos um botão.
+Dessa forma, criamos um programa que lê a tensão sobre um potenciômetro emite o sinal proporcional por meio de um PWM a um LED. Seu funcionamento é indicado pelo acendimento de um LED, sendo ligado e desligado quando apertamos um botão.
 
