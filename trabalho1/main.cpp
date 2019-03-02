@@ -37,7 +37,7 @@ int main()
     led.setValue(high);	
 
     while (!isPressed(botao)){
-	    valorAdc = adc.getPercentValue();
+	valorAdc = adc.getPercentValue();
         cout << valorAdc << endl;
         pwm.setPeriod(PERIODO); //periodo de 500000 ns
         pwm.setDutyCycle(PERIODO*valorAdc/100.0);
