@@ -5,6 +5,7 @@
 #include "../../PWM/PWM.h"
 #include <unistd.h>
 
+//periodo de 500000 ns
 #define PERIODO 500000
 
 using namespace std;
@@ -46,7 +47,7 @@ int main()
     while (!isPressed(botao)){
 	    valorADC = adc.getPercentValue();
         cout << "ADC (%): " << valorADC << "; ";
-        pwm.setPeriod(PERIODO); //periodo de 500000 ns
+        pwm.setPeriod(PERIODO);
         pwm.setDutyCycle(PERIODO*valorADC/100.0);
         cout << "DC PWM (ns): " << pwm.getDutyCycle() << endl;
     }
@@ -56,6 +57,6 @@ int main()
     cout << "DESLIGANDO PWM" << endl;
     pwm.setDutyCycle(0);
     pwm.setState(statePwm::stop);
-    cout << "FIM" << endl;
+    cout << "FIM DO PROGRAMA" << endl;
     return 0;
 }

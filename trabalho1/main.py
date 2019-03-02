@@ -31,7 +31,7 @@ def isPressed(pin):
     return False
 
 
-#Se botão for pressionado, Led acende e PWM = ADC
+#Se botão for pressionado, Led acende e PWM = ADC*100
 while not isPressed(pin=PIN_BUTTON):
     pass
 print("ACENDENDO LED")
