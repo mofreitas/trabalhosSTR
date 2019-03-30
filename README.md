@@ -21,3 +21,8 @@ Criar um programa na *Beaglebone Black* que cumpra os seguintes requisitos:
 Dessa forma, criamos um programa que lê a tensão sobre um potenciômetro emite o sinal proporcional por meio de um PWM a um LED. Seu funcionamento é indicado pelo acendimento de um LED, sendo ligado e desligado quando apertamos um botão.
 
 Para executá-los, rodamos o make e depois executamos o programa em root (uma vez que o GPIO só funciona dessa forma)
+
+## Trabalho 2
+
+Criar o jogo *Genius* na *BeagleBone* usando três leds, 3 botões, 1 potenciômetro para determinar o tempo de resposta, um botão de reset e um display de 7 segmentos para mostrar um numero de acertos 
+
