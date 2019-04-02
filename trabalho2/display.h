@@ -33,7 +33,7 @@ public:
 	
 	~Display();
 	
-	void show(char digito);
+	void show(int digito);
 	
 	void ponto();
 	

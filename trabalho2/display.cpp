@@ -19,11 +19,11 @@ Display::~Display(){
     delete[](saidas);
 }
 
-void Display::show(char digito)
+void Display::show(int digito)
 {
 	switch(digito)
 	{
-		case '0':
+		case 0:
 			saidas[CENTER][0].setValue(low);
 			saidas[LEFT_TOP][0].setValue(high);
 			saidas[LEFT_BOTTOM][0].setValue(high);
@@ -32,7 +32,7 @@ void Display::show(char digito)
 			saidas[RIGHT_TOP][0].setValue(high);
 			saidas[TOP][0].setValue(high);
 			break;				
-		case '1':	
+		case 1:	
 			saidas[CENTER][0].setValue(low);
 			saidas[LEFT_TOP][0].setValue(low);
 			saidas[LEFT_BOTTOM][0].setValue(low);
@@ -41,7 +41,7 @@ void Display::show(char digito)
 			saidas[RIGHT_TOP][0].setValue(high);
 			saidas[TOP][0].setValue(low);
 			break;
-		case '2':	
+		case 2:	
 			saidas[CENTER][0].setValue(high);
 			saidas[LEFT_TOP][0].setValue(low);
 			saidas[LEFT_BOTTOM][0].setValue(high);
@@ -50,7 +50,7 @@ void Display::show(char digito)
 			saidas[RIGHT_TOP][0].setValue(high);
 			saidas[TOP][0].setValue(high);
 			break;
-		case '3':	
+		case 3:	
 			saidas[CENTER][0].setValue(high);
 			saidas[LEFT_TOP][0].setValue(low);
 			saidas[LEFT_BOTTOM][0].setValue(low);
@@ -59,7 +59,7 @@ void Display::show(char digito)
 			saidas[RIGHT_TOP][0].setValue(high);
 			saidas[TOP][0].setValue(high);
 			break;
-		case '4':	
+		case 4:	
 			saidas[CENTER][0].setValue(high);
 			saidas[LEFT_TOP][0].setValue(high);
 			saidas[LEFT_BOTTOM][0].setValue(low);
@@ -68,7 +68,7 @@ void Display::show(char digito)
 			saidas[RIGHT_TOP][0].setValue(high);
 			saidas[TOP][0].setValue(low);
 			break;
-		case '5':	
+		case 5:	
 			saidas[CENTER][0].setValue(high);
 			saidas[LEFT_TOP][0].setValue(high);
 			saidas[LEFT_BOTTOM][0].setValue(low);
@@ -77,7 +77,7 @@ void Display::show(char digito)
 			saidas[RIGHT_TOP][0].setValue(low);
 			saidas[TOP][0].setValue(high);
 			break;
-		case '6':	
+		case 6:	
 			saidas[CENTER][0].setValue(high);
 			saidas[LEFT_TOP][0].setValue(high);
 			saidas[LEFT_BOTTOM][0].setValue(high);
@@ -86,7 +86,7 @@ void Display::show(char digito)
 			saidas[RIGHT_TOP][0].setValue(low);
 			saidas[TOP][0].setValue(high);
 			break;
-		case '7':	
+		case 7:	
 			saidas[CENTER][0].setValue(low);
 			saidas[LEFT_TOP][0].setValue(low);
 			saidas[LEFT_BOTTOM][0].setValue(low);
@@ -95,7 +95,7 @@ void Display::show(char digito)
 			saidas[RIGHT_TOP][0].setValue(high);
 			saidas[TOP][0].setValue(high);
 			break;
-		case '8':	
+		case 8:	
 			saidas[CENTER][0].setValue(high);
 			saidas[LEFT_TOP][0].setValue(high);
 			saidas[LEFT_BOTTOM][0].setValue(high);
@@ -104,7 +104,7 @@ void Display::show(char digito)
 			saidas[RIGHT_TOP][0].setValue(high);
 			saidas[TOP][0].setValue(high);
 			break;
-		case '9':	
+		case 9:	
 			saidas[CENTER][0].setValue(high);
 			saidas[LEFT_TOP][0].setValue(high);
 			saidas[LEFT_BOTTOM][0].setValue(low);
