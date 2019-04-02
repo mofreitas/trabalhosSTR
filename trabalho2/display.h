@@ -2,8 +2,6 @@
 #define DISPLAY_H_
 
 #include "../../BlackGPIO/BlackGPIO.h"
-#include <vector>
-#include <iostream>
 
 using namespace std;
 using namespace BlackLib;

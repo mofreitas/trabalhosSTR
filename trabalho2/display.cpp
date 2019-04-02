@@ -15,9 +15,8 @@ Display::~Display(){
     int i = 0;
     for(i = 0; i < 8; i++){
         delete(saidas[i]);
-    }
-    
-    delete(saidas);
+    }    
+    delete[](saidas);
 }
 
 void Display::show(char digito)
