@@ -24,5 +24,12 @@ Para executá-los, rodamos o make e depois executamos o programa em root (uma ve
 
 ## Trabalho 2
 
-Criar o jogo *Genius* na *BeagleBone* usando três leds, 3 botões, 1 potenciômetro para determinar o tempo de resposta, um botão de reset e um display de 7 segmentos para mostrar um numero de acertos 
+Criar o jogo *Genius* na *BeagleBone* com três leds para indicar a sequência, 3 botões (um relacionado a cada led) para o usuário indicar a sequência, 1 potenciômetro para determinar o tempo de resposta, um botão de reset e um display de 7 segmentos para mostrar a pontuação.
 
+Ao iniciar, o jogador deve informar no início do jogo o tamanho da sequência. Após a aparecer, ele tem 3 segundos para se preparar para responder, cujo tempo depende do tamanho da sequência e por um potenciômetro.
+
+O vídeo de trablaho pode ser visto neste [link]{https://www.youtube.com/watch?v=N6DKfNhe2gw}
+
+## Trabalho 3
+
+Este trabalho objetiva aplicar o conhecimento de *Threads* e prioridade em um programa feito na *BeagleBone*. Ele consiste na criação de duas *threads* cujas prioridades são definidas a cada segundo por dois potenciômetros. Ambas chamam uma função `carga()` (cujo processamento é indicado por um led para cada *thread*) que serve apenas para representar um processamento na *thread*.
