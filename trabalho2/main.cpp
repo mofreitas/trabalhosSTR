@@ -52,9 +52,12 @@ int main()
     //Indica os pinos do display
 	gpioName portas_display[8] = {GPIO_22, GPIO_15, GPIO_14, GPIO_4, GPIO_5, GPIO_49, GPIO_3, GPIO_51};    
     Display display(portas_display, 8);  
-    
+
+    int n_sequencia = 4;
     int pontos = 4;
-    int n_sequencia = 6;
+    
+    cout << "Digite o numero desejado da sequencia: ";
+    cin >> n_sequencia;
     
     //Continuar enquanto o jogador não tiver perdido nem ganhado
     while(pontos < 10 && pontos > 0)
