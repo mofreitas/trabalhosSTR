@@ -28,7 +28,7 @@ Criar o jogo *Genius* na *BeagleBone* com três leds para indicar a sequência, 
 
 Ao iniciar, o jogador deve informar no início do jogo o tamanho da sequência. Após a aparecer, ele tem 3 segundos para se preparar para responder, cujo tempo depende do tamanho da sequência e por um potenciômetro.
 
-O vídeo de trablaho pode ser visto neste [link]{https://www.youtube.com/watch?v=N6DKfNhe2gw}
+O vídeo de trablaho pode ser visto neste [link](https://www.youtube.com/watch?v=N6DKfNhe2gw)
 
 ## Trabalho 3
 
