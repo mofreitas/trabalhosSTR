@@ -40,7 +40,7 @@ O vídeo desse trabalho pode ser visto neste [link](https://youtu.be/VlvBfMAmoKw
 
 Esse trabalho consistia em simular quatro trilhos de trens em que alguns de seus segmentos eram compartilhados, conforme podemos ver na imagem a seguir, usando a *BeagleBone*.
 
-![trilhos](../trabalho4/trilhos.png?raw=true)
+![trilhos](/trabalho4/trilhos.png?raw=true)
 
 Cada trem foi representado por uma *thread* e a passagem deles por cada segmento era representada pelo acendimento de um Led. A velocidade deles eram definidas por quatro potenciômetros, cujos valores eram obtidos a cada segundo. Por fim, não deveria haver *DeadLocks* nem trens usando o mesmo trilho ao mesmo tempo.
 
