@@ -32,4 +32,16 @@ O vídeo desse trabalho pode ser visto neste [link](https://www.youtube.com/watc
 
 ## Trabalho 3
 
-Este trabalho objetiva aplicar o conhecimento de *Threads* e prioridade em um programa feito na *BeagleBone*. Ele consiste na criação de duas *threads* cujas prioridades são definidas a cada segundo por dois potenciômetros. Ambas chamam uma função `carga()` (cujo processamento é indicado por um led para cada *thread*) que serve para ocupar tempo da CPU*.
+Este trabalho objetiva aplicar o conhecimento de *Threads* e prioridade em um programa feito na *BeagleBone*. Ele consiste na criação de duas *threads* cujas prioridades são definidas a cada segundo por dois potenciômetros. Ambas chamam uma função `carga()` (cujo processamento é indicado por um led para cada *thread*) que serve para ocupar tempo da CPU.
+
+O vídeo desse trabalho pode ser visto neste [link](https://youtu.be/VlvBfMAmoKw)
+
+## Trabalho 4
+
+Esse trabalho consistia em simular quatro trilhos de trens em que alguns de seus segmentos eram compartilhados, conforme podemos ver na imagem a seguir, usando a *BeagleBone*.
+
+![trilhos](../trabalho4/trilhos.eps?raw=true)
+
+Cada trem foi representado por uma *thread* e a passagem deles por cada segmento era representada pelo acendimento de um Led. A velocidade deles eram definidas por quatro potenciômetros, cujos valores eram obtidos a cada segundo. Por fim, não deveria haver *DeadLocks* nem trens usando o mesmo trilho ao mesmo tempo.
+
+Mais informações podem ser encontradas neste [vídeo](https://www.youtube.com/user/markbad00)
