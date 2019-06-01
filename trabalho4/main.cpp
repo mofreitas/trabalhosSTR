@@ -2,25 +2,26 @@
 #include <pthread.h>
 #include "../../BlackGPIO/BlackGPIO.h"
 #include "../../ADC/Adc.h"
-#include <unistd.h>
-#include <time.h>
-#include <sys/resource.h>
+#include <unistd.h> //sleep
+#include <time.h>   //nanosleep
+#include <sched.h>  //sched
 
-#define TEMPO_MAX 5000
+#define TEMPO_MIN 500
+#define TEMPO_MAX 4500
 #define SEGUNDO 1000
 
 using namespace std;
 using namespace BlackLib;
 
 enum Trilho{
-    trilho2 = 0,
-    trilho3,    
+    trilho1 = 0,
+    trilho2,
+    trilho3,
+    trilho4,    
     trilho5,
     trilho6,
-    trilho8,
-    trilho1,
-    trilho4,
     trilho7,
+    trilho8,
     trilho9,
     trilho22,
     trilho33,
@@ -69,16 +70,18 @@ BlackGPIO leds[14] = {BlackGPIO(GPIO_66, output),
                       BlackGPIO(GPIO_22, output),
                       BlackGPIO(GPIO_61, output)};                     
 
+//Mutexes dos trilhos
 pthread_mutex_t mtx_trilhos[9] = {PTHREAD_MUTEX_INITIALIZER,
-                                    PTHREAD_MUTEX_INITIALIZER,
-                                    PTHREAD_MUTEX_INITIALIZER,
-                                    PTHREAD_MUTEX_INITIALIZER,
-                                    PTHREAD_MUTEX_INITIALIZER,
-                                    PTHREAD_MUTEX_INITIALIZER,
-                                    PTHREAD_MUTEX_INITIALIZER,
-                                    PTHREAD_MUTEX_INITIALIZER,
-                                    PTHREAD_MUTEX_INITIALIZER};
-                            
+                                  PTHREAD_MUTEX_INITIALIZER,
+                                  PTHREAD_MUTEX_INITIALIZER,
+                                  PTHREAD_MUTEX_INITIALIZER,
+                                  PTHREAD_MUTEX_INITIALIZER,
+                                  PTHREAD_MUTEX_INITIALIZER,
+                                  PTHREAD_MUTEX_INITIALIZER,
+                                  PTHREAD_MUTEX_INITIALIZER,
+                                  PTHREAD_MUTEX_INITIALIZER};
+
+//Mutexes para alterar velocidade dos trens                          
 pthread_mutex_t mutex[4] = {PTHREAD_MUTEX_INITIALIZER,
                             PTHREAD_MUTEX_INITIALIZER,
                             PTHREAD_MUTEX_INITIALIZER,
@@ -87,10 +90,10 @@ pthread_mutex_t mutex[4] = {PTHREAD_MUTEX_INITIALIZER,
 void* trem_func1(void* arg)
 {
     struct timespec t;
-    setpriority(PRIO_PROCESS, 0, 5); 
     while(true)
     {
-        //Reserva s1
+        //O trilho em que o trem está só é desbloqueado quando
+        //ele consegue bloquear o trilho em que ele vai.
         pthread_mutex_lock(&mtx_trilhos[trilho1]);
         pthread_mutex_unlock(&mtx_trilhos[trilho3]);
             pthread_mutex_lock(&mutex[trem1]);
@@ -130,8 +133,7 @@ void* trem_func1(void* arg)
 
 void* trem_func2(void* arg)
 {
-    struct timespec t;
-    setpriority(PRIO_PROCESS, 0, 5); 
+    struct timespec t; 
     while(true)
     {
         //Reserva s4
@@ -187,7 +189,6 @@ void* trem_func2(void* arg)
 void* trem_func3(void* arg)
 {
     struct timespec t;
-    setpriority(PRIO_PROCESS, 0, 5); 
     while(true)
     {
         //Reserva s7
@@ -231,7 +232,6 @@ void* trem_func3(void* arg)
 void* trem_func4(void* arg)
 {
     struct timespec t;
-    setpriority(PRIO_PROCESS, 0, 5); 
     while(true)
     {
         //Reserva s9
@@ -288,12 +288,25 @@ int main()
 {
     pthread_t threads[4];
     ADC potenc[4] = {ADC(AIN0), ADC(AIN1), ADC(AIN2), ADC(AIN3)};
+    struct sched_param prioridade;
+    prioridade.sched_priority = 5;
+    
+    //Altera prioridade para 1 usando escalonador de tempo real
+    //(Nesse caso, quanto maior o valor, maior a prioridade)
+    sched_setscheduler(0 , SCHED_FIFO, &prioridade);
     
     //Criação das threads
     pthread_create(&threads[trem1], NULL, trem_func1, NULL);
     pthread_create(&threads[trem2], NULL, trem_func2, NULL);
     pthread_create(&threads[trem3], NULL, trem_func3, NULL);
     pthread_create(&threads[trem4], NULL, trem_func4, NULL);
+    
+    //Altera prioridade das threads para serem inferior a thread main
+    prioridade.sched_priority = 1;
+    pthread_setschedparam(threads[trem1], SCHED_FIFO, &prioridade);
+    pthread_setschedparam(threads[trem2], SCHED_FIFO, &prioridade);
+    pthread_setschedparam(threads[trem3], SCHED_FIFO, &prioridade);
+    pthread_setschedparam(threads[trem4], SCHED_FIFO, &prioridade);
     
     long long valor = 0; 
     
@@ -314,28 +327,28 @@ int main()
     
     while(true)
     {    
-        valor = TEMPO_MAX*potenc[trem1].getPercentValue()/100.0;
+        valor = TEMPO_MIN+TEMPO_MAX*potenc[trem1].getPercentValue()/100.0;
         pthread_mutex_lock(&mutex[trem1]);
             tempo[trem1].tv_sec = valor/SEGUNDO;
             tempo[trem1].tv_nsec = (valor%SEGUNDO)*1000000L;
             cout << "Tempo - trem 1: " << tempo[trem1].tv_sec << ":" << tempo[trem1].tv_nsec << endl;
         pthread_mutex_unlock(&mutex[trem1]);
         
-        valor = TEMPO_MAX*potenc[trem2].getPercentValue()/100.0; 
+        valor = TEMPO_MIN+TEMPO_MAX*potenc[trem2].getPercentValue()/100.0; 
         pthread_mutex_lock(&mutex[trem2]); 
             tempo[trem2].tv_sec = valor/SEGUNDO;
             tempo[trem2].tv_nsec = (valor%SEGUNDO)*1000000L;  
             cout << "Tempo - trem 2: " << tempo[trem2].tv_sec << ":" << tempo[trem2].tv_nsec << endl;    
         pthread_mutex_unlock(&mutex[trem2]);
         
-        valor = TEMPO_MAX*potenc[trem3].getPercentValue()/100.0; 
+        valor = TEMPO_MIN+TEMPO_MAX*potenc[trem3].getPercentValue()/100.0; 
         pthread_mutex_lock(&mutex[trem3]);
             tempo[trem3].tv_sec = valor/SEGUNDO;
             tempo[trem3].tv_nsec = (valor%SEGUNDO)*1000000L; 
             cout << "Tempo - trem 3: " << tempo[trem3].tv_sec << ":" << tempo[trem3].tv_nsec << endl;  
         pthread_mutex_unlock(&mutex[trem3]);
         
-        valor = TEMPO_MAX*potenc[trem4].getPercentValue()/100.0;  
+        valor = TEMPO_MIN+TEMPO_MAX*potenc[trem4].getPercentValue()/100.0;  
         pthread_mutex_lock(&mutex[trem4]);
             tempo[trem4].tv_sec = valor/SEGUNDO;
             tempo[trem4].tv_nsec = (valor%SEGUNDO)*1000000L;              
@@ -343,6 +356,6 @@ int main()
         pthread_mutex_unlock(&mutex[trem4]);
                             
         
-        sleep(10);
+        sleep(1);
     }
 }
