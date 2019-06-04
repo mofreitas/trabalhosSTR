@@ -44,6 +44,6 @@ Esse trabalho consistia em simular quatro trilhos de trens em que alguns de seus
 
 Cada trem foi representado por uma *thread* e a passagem deles por cada segmento era representada pelo acendimento de um Led. A velocidade deles eram definidas por quatro potenciômetros, cujos valores eram obtidos a cada segundo. 
 
-Para que os trens não usassem o mesmo trilho ao mesmo tempo, cada trem (*thread*) deve reservar o uso do segmento de trilho (recurso) usando *mutex*. Além disso, o trem não libera o trilho em que ele está antes de obter acesso ao próximo trilho. Para evitar *Deadlocks*, o trens 1 e 3 reservam, respectivamente, os trilhos 3 e 5 antes dos trilhos 2 e 8. respectivamente
+Para que os trens não usassem o mesmo trilho ao mesmo tempo, cada trem (*thread*) deve reservar o uso do segmento de trilho (recurso) usando *mutex*. Além disso, o trem não libera o trilho em que ele está antes de obter acesso ao próximo trilho. Para evitar *Deadlocks*, o trens 1 e 3 reservam, respectivamente, os trilhos 3 e 5 antes dos trilhos 2 e 8.
 
-Mais informações poderão ser encontradas em breve em um vídeo neste [canal](https://www.youtube.com/user/markbad00) do youtube.
+Mais informações poderão ser encontradas neste [video](https://youtu.be/jbpJQl0N46s).
