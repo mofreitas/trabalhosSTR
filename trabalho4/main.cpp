@@ -14,20 +14,20 @@ using namespace std;
 using namespace BlackLib;
 
 enum Trilho{
-    trilho1 = 0,
-    trilho2,
-    trilho3,
-    trilho4,    
-    trilho5,
-    trilho6,
-    trilho7,
-    trilho8,
-    trilho9,
-    trilho22,
-    trilho33,
-    trilho55,
-    trilho66,
-    trilho88
+    trilho1 = 0,    //trem 1
+    trilho2,        //trem 1
+    trilho3,        //trem 1
+    trilho4,        //trem 2
+    trilho5,        //trem 2
+    trilho6,        //trem 2
+    trilho7,        //trem 3
+    trilho8,        //trem 3
+    trilho9,        //trem 4
+    trilho22,       //trem 2
+    trilho33,       //trem 4
+    trilho55,       //trem 3
+    trilho66,       //trem 4
+    trilho88        //trem 4
 };
 
 enum Trens
@@ -38,6 +38,7 @@ enum Trens
     trem4
 };
 
+//vetor com tempo de espera de cada trem nos trilhos (velocidade)
 struct timespec tempo[4];
 
 BlackGPIO leds[14] = {BlackGPIO(GPIO_66, output, FastMode),
@@ -278,7 +279,7 @@ int main()
     struct sched_param prioridade;
     prioridade.sched_priority = 5;
     
-    //Altera prioridade para 1 usando escalonador de tempo real
+    //Altera prioridade para 5 usando escalonador de tempo real
     //(Nesse caso, quanto maior o valor, maior a prioridade)
     sched_setscheduler(0 , SCHED_FIFO, &prioridade);
     
@@ -289,13 +290,14 @@ int main()
     pthread_create(&threads[trem4], NULL, trem_func4, NULL);
     
     //Altera prioridade das threads para serem inferior a thread main
+    //(para 1)
     prioridade.sched_priority = 1;
     pthread_setschedparam(threads[trem1], SCHED_FIFO, &prioridade);
     pthread_setschedparam(threads[trem2], SCHED_FIFO, &prioridade);
     pthread_setschedparam(threads[trem3], SCHED_FIFO, &prioridade);
     pthread_setschedparam(threads[trem4], SCHED_FIFO, &prioridade);
     
-    long long valor = 0; 
+    int valor = 0; 
     
     //Normaliza o valor dos potenciômetros de 500ms a 5000ms, inserindo na posição correspondente ao trem
     //no vetor tempo
