@@ -47,3 +47,9 @@ Cada trem foi representado por uma *thread* e a passagem deles por cada segmento
 Para que os trens não usassem o mesmo trilho ao mesmo tempo, cada trem (*thread*) deve reservar o uso do segmento de trilho (recurso) usando *mutex*. Além disso, o trem não libera o trilho em que ele está antes de obter acesso ao próximo trilho. Para evitar *Deadlocks*, o trens 1 e 3 reservam, respectivamente, os trilhos 3 e 5 antes dos trilhos 2 e 8.
 
 Mais informações poderão ser encontradas neste [video](https://youtu.be/jbpJQl0N46s).
+
+## Trabalho 5
+
+Esse trabalho consiste no controle dos trens por meio usando sockets. Assim, os valores dos potenciômetros são enviados para outra placa enquanto ela recebe os valores enviados de outra placa, ambos via *multicast*.
+
+Para isso, a *thread* principal foi utilizada para fazer o envio dos valores dos potenciômetros por meio de um cliente *multicast*, e o recebimento de valores foi feito através de um servidor *multicast* em outra *thread* criada para esse fim.
